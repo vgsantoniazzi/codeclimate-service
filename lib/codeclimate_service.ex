@@ -1,0 +1,2 @@
+defmodule CodeclimateService do
+end
