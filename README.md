@@ -2,7 +2,7 @@
 
 This is a microservice to works with Github pull requests and codeclimate-cli.
 
-Always when a pull request is open or update with commits, this this webservice will be called by GitHub and process new instance of codeclimate-cli docker.
+Always when a pull request is open or update with commits, this this webservice will be called by GitHub and process new instance of codeclimate-cli up on docker.
 
 ## Getting Started
 
