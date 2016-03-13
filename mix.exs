@@ -16,12 +16,12 @@ defmodule CodeclimateService.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :httpoison, dot_env(Mix.env)]]
+    [applications: [:logger, :httpoison, dot_env(Mix.env)] |> Enum.filter(fn(v) -> v != nil end)]
   end
 
   defp dot_env(:dev), do: :dotenv
-  defp dot_env(_), do: dot_env
-  defp dot_env, do: :dotenv
+  defp dot_env(:test), do: :dotenv
+  defp dot_env(_), do: nil
 
   # Dependencies can be Hex packages:
   #
