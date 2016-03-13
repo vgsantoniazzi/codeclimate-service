@@ -14,7 +14,7 @@ defmodule CodeclimateService.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -31,7 +31,8 @@ defmodule CodeclimateService.Mixfile do
       { :sugar, "~> 0.4.6" },
       { :postgrex, ">= 0.0.0" },
       { :ecto, "~> 2.0.0-beta", override: true },
-      { :plug, github: "vgsantoniazzi/plug", override: true }
+      { :plug, github: "vgsantoniazzi/plug", override: true },
+      { :httpoison, "~> 0.8.0" }
     ]
   end
 end

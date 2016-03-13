@@ -3,17 +3,17 @@ defmodule Test.Controllers.Webhook do
   use Plug.Test
 
   test "When GitHub event is a pull_request" do
-    conn = conn(:post, "/webhook", %{"id" => 1})
-      |> Plug.Conn.put_req_header("X-GitHub-Event", "pull_request")
+    conn = conn(:post, "/webhook", %{"pull_request" => %{"action" => "created", "head" => %{"repo" => %{"full_name" => "codeclimate_service"}}}})
+      |> Plug.Conn.put_req_header("x-github-event", "pull_request")
     opts = CodeclimateService.Controllers.Webhook.init [ action: :create ]
     conn = CodeclimateService.Controllers.Webhook.call(conn, opts)
     assert conn.status == 201
-    assert conn.resp_body == "{\"message\":{\"id\":1}}"
+    assert conn.resp_body == "{\"message\":\"Created new build\"}"
   end
 
   test "When GitHub event is not a pull_request" do
-    conn = conn(:post, "/webhook", %{"id" => 1})
-      |> Plug.Conn.put_req_header("X-GitHub-Event", "ping")
+    conn = conn(:post, "/webhook", %{"action" => "opened"})
+      |> Plug.Conn.put_req_header("x-github-event", "ping")
     opts = CodeclimateService.Controllers.Webhook.init [ action: :create ]
     conn = CodeclimateService.Controllers.Webhook.call(conn, opts)
     assert conn.status == 200
