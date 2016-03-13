@@ -17,7 +17,7 @@ defmodule CodeclimateService.Services.GithubNotifier do
     %{
       "state" => "#{status}",
       "target_url" => "https://example.com/build/status",
-      "description" => apply(GithubNotifier, :description, [status]),
+      "description" => description(status),
       "context" => "continuous-integration/codeclimate"
     }
   end
