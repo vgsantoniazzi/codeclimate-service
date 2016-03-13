@@ -4,18 +4,11 @@ defmodule CodeclimateService.Services.GithubNotifier do
   end
 
   def send_status(repository, sha, json) do
-    case HTTPoison.post(url(repository, sha), Poison.encode!(json), header) do
-      {:ok, %HTTPoison.Response{status_code: 201, body: body}} ->
-        IO.puts body
-      {:ok, %HTTPoison.Response{status_code: 404, body: body}} ->
-        IO.puts body
-      {:error, %HTTPoison.Error{reason: reason}} ->
-        IO.inspect reason
-    end
+    HTTPoison.post(url(repository, sha), Poison.encode!(json), header)
   end
 
   def url(repository, sha) do
-    "https://api.github.com/repos/#{repository}/statuses/#{sha}/?access_token=#{access_token}"
+    "https://api.github.com/repos/#{repository}/statuses/#{sha}?access_token=#{access_token}"
   end
 
   def json(status) do
