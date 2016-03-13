@@ -32,7 +32,8 @@ defmodule CodeclimateService.Mixfile do
       { :postgrex, ">= 0.0.0" },
       { :ecto, "~> 2.0.0-beta", override: true },
       { :plug, github: "vgsantoniazzi/plug", override: true },
-      { :httpoison, "~> 0.8.0" }
+      { :httpoison, "~> 0.8.0" },
+      { :dotenv, "~> 2.0.0" }
     ]
   end
 end
